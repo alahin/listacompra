@@ -12,7 +12,6 @@ class _AddEditListPageState extends State<AddEditListPage> {
   TextEditingController name = TextEditingController();
 
   add(ListaModel listaModel) async {
-    print("add before");
     await ListaService().addLista(listaModel);
     Toast.show("Guardado", context, gravity: Toast.CENTER, duration: 2);
   }
