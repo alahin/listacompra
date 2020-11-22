@@ -3,16 +3,16 @@ import 'package:listacompra/models/listaModel.dart';
 import 'package:listacompra/service/listaService.dart';
 import 'package:toast/toast.dart';
 
-class AddEditListPage extends StatefulWidget {
+class AddListPage extends StatefulWidget {
   @override
-  _AddEditListPageState createState() => _AddEditListPageState();
+  _AddListPageState createState() => _AddListPageState();
 }
 
-class _AddEditListPageState extends State<AddEditListPage> {
+class _AddListPageState extends State<AddListPage> {
   TextEditingController name = TextEditingController();
 
-  add(ListaModel listaModel) async {
-    await ListaService().addLista(listaModel);
+  addLista(ListaModel listaModel) async {
+    await ListaService().add(listaModel);
     Toast.show("Guardado", context, gravity: Toast.CENTER, duration: 2);
   }
 
@@ -48,7 +48,7 @@ class _AddEditListPageState extends State<AddEditListPage> {
                   ListaModel listaModel = ListaModel(
                     name: name.text,
                   );
-                  add(listaModel);
+                  addLista(listaModel);
                 }
               },
               child: Text("Guardar"),

@@ -1,16 +1,12 @@
 import 'dart:convert';
-
 import 'package:listacompra/models/listaModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:listacompra/constants/constants.dart' as Constants;
 
 class ListaService {
-  static const PATH = "http://192.168.1.42:8181/api/listas/";
-  static const ADD_LISTA_URL = PATH;
-  static const GET_LISTAS_URL = PATH;
-
-  Future<String> addLista(ListaModel listaModel) async {
+  Future<String> add(ListaModel listaModel) async {
     final response = await http.post(
-      ADD_LISTA_URL,
+      Constants.URI_LISTAS,
       body: listaModel.toJsonAdd(),
     );
     if (response.statusCode == 200) {
@@ -21,8 +17,8 @@ class ListaService {
     }
   }
 
-  Future<List<ListaModel>> getAllListas() async {
-    final response = await http.get(GET_LISTAS_URL);
+  Future<List<ListaModel>> getAll() async {
+    final response = await http.get(Constants.URI_LISTAS);
     if (response.statusCode == 200) {
       return listFromJson(response.body);
     } else {

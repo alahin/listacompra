@@ -1,21 +1,21 @@
 class ProductoModel {
   final int id;
-  final String title;
+  final String name;
+  final int idLista;
 
-  ProductoModel({
-    this.id,
-    this.title,
-  });
+  ProductoModel({this.id, this.name, this.idLista});
 
   factory ProductoModel.fromJson(Map<String, dynamic> map) {
     return ProductoModel(
       id: map['id'],
-      title: map['title'],
+      name: map['name'],
+      idLista: map['id_lista'],
     );
   }
 
   Map<String, dynamic> toJsonAdd() => {
         "id": id,
-        "title": title,
+        "name": name,
+        "id_lista": idLista,
       };
 }

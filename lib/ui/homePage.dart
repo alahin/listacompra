@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:listacompra/models/listaModel.dart';
 import 'package:listacompra/service/listaService.dart';
-import 'package:listacompra/ui/addEditListPage.dart';
+import 'package:listacompra/ui/addListPage.dart';
 import 'package:intl/intl.dart';
+
+import 'detailsListPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final df = new DateFormat('dd-MM-yyyy hh:mm');
 
   getAllListas() async {
-    listasList = await ListaService().getAllListas();
+    listasList = await ListaService().getAll();
     setState(() {
       loading = false;
     });
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddEditListPage(),
+                    builder: (context) => AddListPage(),
                   ),
                 ).then((value) => getAllListas());
               },
@@ -56,13 +58,17 @@ class _HomePageState extends State<HomePage> {
                   ListaModel lista = listasList[index];
                   return ListTile(
                     title: Text(lista.name),
-                    subtitle: Text(
-                      df.format(
+                    subtitle: Text(df.format(
                         new DateTime.fromMillisecondsSinceEpoch(
-                            lista.updatedAt),
-                      ),
-                    ),
-                    onTap: () {},
+                            lista.updatedAt))),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsListPage(),
+                        ),
+                      ).then((value) => getAllListas());
+                    },
                   );
                 },
               ));
