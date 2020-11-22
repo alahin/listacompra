@@ -49,6 +49,7 @@ class _AddListPageState extends State<AddListPage> {
                     name: name.text,
                   );
                   addLista(listaModel);
+                  Navigator.pop(context);
                 }
               },
               child: Text("Guardar"),
